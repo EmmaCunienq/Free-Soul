@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SliddingButton : MonoBehaviour
+public class SlidingButton : MonoBehaviour
 {
     public GameObject guide;
     public float minX;
