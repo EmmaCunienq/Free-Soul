@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7931318532461635341}
   m_Layer: 0
   m_Name: Slide Button
-  m_TagString: Untagged
+  m_TagString: SlideButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
