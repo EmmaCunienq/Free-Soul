@@ -16,8 +16,8 @@ public class SliddingButton : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float currentXPos = transform.localPosition.x;
+        float currentXPos = transform.position.x;
         float xPos = Mathf.Clamp(currentXPos, minX, maxX);
-        transform.localPosition = new Vector3(xPos, 0, 0);
+        transform.position = new Vector3(xPos, transform.position.y, transform.position.z);
     }
 }
