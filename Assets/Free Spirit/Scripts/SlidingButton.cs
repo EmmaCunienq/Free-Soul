@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class SlidingButton : MonoBehaviour
@@ -19,5 +20,10 @@ public class SlidingButton : MonoBehaviour
         float currentXPos = transform.position.x;
         float xPos = Mathf.Clamp(currentXPos, minX, maxX);
         transform.position = new Vector3(xPos, transform.position.y, transform.position.z);
+    }
+
+    public float GetRotationPercentage ()
+    {
+        return (transform.localPosition.x + 0.5f) * 100;
     }
 }
