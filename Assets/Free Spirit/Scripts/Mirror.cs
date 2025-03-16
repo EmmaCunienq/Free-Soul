@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class Mirror : MonoBehaviour
@@ -33,9 +34,24 @@ public class Mirror : MonoBehaviour
         ChangeMirrorRotation(slideButton.transform.GetChild(0).GetComponent<SlidingButton>().GetRotationPercentage());
     }
 
-    public void ChangeMirrorRotation(float _rotationPercentage)
+    private void ChangeMirrorRotation(float _rotationPercentage)
     {
         float currentRotation = transform.rotation.z;
         transform.rotation = Quaternion.Euler(0, 0, baseRotation + 90 * _rotationPercentage / 100);
+    }
+
+
+
+    public Vector2 GetNormalisedPerpendicularVector ()
+    {
+        Transform child = transform.GetChild(0);
+        Transform directionChild = transform.GetChild(1);
+
+        Vector2 A = new Vector2(child.position.x, child.position.y);
+        Vector2 B = new Vector2(directionChild.position.x, directionChild.position.y);
+
+        Vector2 normalisedVector = (A - B).normalized;
+
+        return normalisedVector;
     }
 }
