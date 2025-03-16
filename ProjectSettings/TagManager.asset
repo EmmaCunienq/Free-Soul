@@ -8,6 +8,8 @@ TagManager:
   - Soul
   - Waterfall
   - SlideButton
+  - Mirror
+  - End Laser
   layers:
   - Default
   - TransparentFX

@@ -1,16 +1,18 @@
 using UnityEditor.Animations;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 public class LightRay : MonoBehaviour
 {
 
-    public LineRenderer linerenderer;
+    private LineRenderer linerenderer;
 
-    public GameObject child;
-    public Vector2 direction;
-    public Vector2 origin;
+    private GameObject child;
+    private Vector2 direction;
+    private Vector2 origin;
 
+    public GameObject end;
 
     void Start()
     {
@@ -26,6 +28,8 @@ public class LightRay : MonoBehaviour
         origin = transform.position;
 
         linerenderer = GetComponent<LineRenderer>();
+
+        end = GameObject.FindGameObjectWithTag("End Laser");
     }
 
     // Update is called once per frame
@@ -35,6 +39,15 @@ public class LightRay : MonoBehaviour
 
         if (hit.collider != null)
         {
+            if (hit.collider.CompareTag("End Laser"))
+            {
+                ActivateEndPrism();
+            }
+            else
+            {
+                DeactivateEndPrism();
+            }
+
             linerenderer.positionCount = 2;
             linerenderer.SetPosition(0, origin);
             linerenderer.SetPosition(1, hit.point);
@@ -68,6 +81,15 @@ public class LightRay : MonoBehaviour
 
         if (hit.collider != null)
         {
+            if (hit.collider.CompareTag("End Laser"))
+            {
+                ActivateEndPrism();
+            }
+            else
+            {
+                DeactivateEndPrism();
+            }
+
             linerenderer.positionCount++;
             linerenderer.SetPosition(linerenderer.positionCount-1, hit.point);
 
@@ -76,8 +98,19 @@ public class LightRay : MonoBehaviour
         }
         else
         {
+            Debug.DrawRay(origin, direction * 100, Color.red);
             linerenderer.positionCount++;
-            linerenderer.SetPosition(linerenderer.positionCount - 1, direction * 100);
+            linerenderer.SetPosition(linerenderer.positionCount - 1, direction * 100); // erreur quand le laser est dans le vide... le deuxieme point n'est pas le bon
         }
+    }
+
+    private void ActivateEndPrism ()
+    {
+        end.GetComponent<SpriteRenderer>().color = gameObject.GetComponent<SpriteRenderer>().color;
+    }
+
+    private void DeactivateEndPrism ()
+    {
+        end.GetComponent<SpriteRenderer>().color = Color.white;
     }
 }
