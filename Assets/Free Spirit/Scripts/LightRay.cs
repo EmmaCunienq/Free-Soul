@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 public class LightRay : MonoBehaviour
 {
 
-    //public LineRenderer linerenderer;
+    public LineRenderer linerenderer;
 
     public GameObject child;
     public Vector2 direction;
@@ -24,24 +24,29 @@ public class LightRay : MonoBehaviour
         direction = (bPoint - aPoint).normalized;
 
         origin = transform.position;
+
+        linerenderer = GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 currentDirection = direction;
-        Vector2 currentOrigin = origin;
         RaycastHit2D hit = Physics2D.Raycast(origin, direction);
 
         if (hit.collider != null)
         {
-            Debug.DrawLine(currentOrigin, hit.point);
+            linerenderer.positionCount = 2;
+            linerenderer.SetPosition(0, origin);
+            linerenderer.SetPosition(1, hit.point);
+            
 
-            GetReflectedValues(hit.collider.CompareTag("Mirror"), hit, currentDirection);
+            GetReflectedValues(hit.collider.CompareTag("Mirror"), hit, direction);
         }
         else
         {
-            Debug.DrawRay(currentOrigin, direction * 100, Color.red);
+            linerenderer.positionCount = 2;
+            linerenderer.SetPosition(0, origin);
+            linerenderer.SetPosition(1, direction * 100);
         }
     }
 
@@ -63,13 +68,16 @@ public class LightRay : MonoBehaviour
 
         if (hit.collider != null)
         {
-            Debug.DrawLine(origin, hit.point);
+            linerenderer.positionCount++;
+            linerenderer.SetPosition(linerenderer.positionCount-1, hit.point);
+
 
             GetReflectedValues(hit.collider.CompareTag("Mirror"), hit, direction);
         }
         else
         {
-            Debug.DrawRay(origin, direction * 100, Color.red);
+            linerenderer.positionCount++;
+            linerenderer.SetPosition(linerenderer.positionCount - 1, direction * 100);
         }
     }
 }
