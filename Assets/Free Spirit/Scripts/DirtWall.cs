@@ -6,6 +6,11 @@ public class DirtWall : MonoBehaviour
 
     public bool isActive;
 
+    private void Start()
+    {
+        SwitchActivation();
+    }
+
     public void ActivateWall ()
     {
         GetComponent<SpriteRenderer>().enabled = true;
@@ -22,11 +27,11 @@ public class DirtWall : MonoBehaviour
     {
         if (isActive)
         {
-            DeactivateWall();
+            ActivateWall();
         }
         else
         {
-            ActivateWall();
+            DeactivateWall();
         }
     }
 }
