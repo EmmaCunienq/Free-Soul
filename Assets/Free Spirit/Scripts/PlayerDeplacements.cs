@@ -16,6 +16,8 @@ public class PlayerDeplacements : MonoBehaviour
     private Rigidbody2D playerRB;
     private Animator animator;
 
+    public float distancePrism;
+
     private void Start()
     {
         playerRB = GetComponent<Rigidbody2D>();
@@ -109,5 +111,10 @@ public class PlayerDeplacements : MonoBehaviour
             isGrounded = false;
             isOnAWall = false;
         }
+    }
+
+    public bool isClosePrism (GameObject prism)
+    {
+        return ((prism.transform.position.x < transform.position.x + distancePrism && prism.transform.position.x > transform.position.x - distancePrism) && (prism.transform.position.y < transform.position.y + distancePrism && prism.transform.position.y > transform.position.y - distancePrism));
     }
 }

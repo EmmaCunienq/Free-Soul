@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -8,10 +9,13 @@ public class SoulFollow : MonoBehaviour
     public float soulSpeed;
     public float playerDistance;
     private bool isFollowing;
-
+ 
     //Animations Parameters
     private Animator animator;
     public float facing = 0;
+
+    public GameObject[] prisms;
+    public bool goingToPrism;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -22,6 +26,9 @@ public class SoulFollow : MonoBehaviour
         isFollowing = true;
 
         animator = GetComponent<Animator>();
+
+        prisms = GameObject.FindGameObjectsWithTag("Prism");
+        goingToPrism = false;
     }
 
     // Update is called once per frame
@@ -45,6 +52,18 @@ public class SoulFollow : MonoBehaviour
 
         UpdateAnimationsParameters();
 
+        
+        foreach (GameObject prism in prisms)
+        {
+            if (player.GetComponent<PlayerDeplacements>().isClosePrism(prism) && Input.GetKeyDown(KeyCode.E))
+            {
+                isFollowing = false;
+                Debug.Log("je suis proche de : " + prism.name);
+                
+                StartCoroutine(GoToPrism(prism));
+                
+            }
+        }
     }
 
     void Following ()
@@ -72,12 +91,34 @@ public class SoulFollow : MonoBehaviour
     }
 
 
+    IEnumerator GoToPrism (GameObject prism)
+    {
+        goingToPrism = true;
+
+        Vector3 currentPosition = transform.position;
+        Vector3 targetPosition = new Vector3(prism.transform.position.x, prism.transform.position.y, prism.transform.position.z);
+        while (Vector3.Distance(transform.position,targetPosition) > 0.1f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, soulSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+        GetComponent<SpriteRenderer>().color = prism.GetComponent<SpriteRenderer>().color;
+
+        isFollowing = true;
+        goingToPrism = false;
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            isFollowing = true;
+            if (!goingToPrism)
+            {
+                isFollowing = true;
+            }
+            
         }
 
         if( collision.gameObject.CompareTag("Waterfall"))
