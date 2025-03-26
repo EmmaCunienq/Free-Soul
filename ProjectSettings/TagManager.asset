@@ -10,6 +10,7 @@ TagManager:
   - SlideButton
   - Mirror
   - End Laser
+  - Prism
   layers:
   - Default
   - TransparentFX
