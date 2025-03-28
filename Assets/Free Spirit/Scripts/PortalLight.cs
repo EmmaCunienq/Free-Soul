@@ -3,7 +3,7 @@ using UnityEngine;
 public class PortalLight : MonoBehaviour
 {
     private Color goalColor;
-    private bool isActive;
+    public bool isActive;
 
     private void Start()
     {
