@@ -11,11 +11,11 @@ public class PortalLight : MonoBehaviour
         {
             goalColor = Color.red;
         }
-        else if (gameObject.name == "Green Light")
+        else if (gameObject.name == "Green light")
         {
             goalColor = Color.green;
         }
-        else if (gameObject.name == "Blue Light")
+        else if (gameObject.name == "Blue light")
         {
             goalColor = Color.blue;
         }
