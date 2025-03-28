@@ -133,6 +133,8 @@ public class SoulFollow : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().color = Color.white;
 
             isFollowing = true;
+
+            portal.CheckActivation();
         }
     }
 
