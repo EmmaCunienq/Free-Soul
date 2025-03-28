@@ -59,9 +59,10 @@ public class SoulFollow : MonoBehaviour
             {
                 isFollowing = false;
                 Debug.Log("je suis proche de : " + prism.name);
-                
-                StartCoroutine(GoToPrism(prism));
-                
+
+                goingToPrism = true;
+
+                StartCoroutine(GoTo(prism));
             }
         }
     }
@@ -86,27 +87,27 @@ public class SoulFollow : MonoBehaviour
 
     bool isClose ()
     {
-
-        return ((transform.position.x < player.transform.position.x + playerDistance && transform.position.x > player.transform.position.x - playerDistance) && (transform.position.y < player.transform.position.y + playerDistance && transform.position.y > player.transform.position.y - playerDistance));
+        return Vector2.Distance(transform.position, player.transform.position) < playerDistance;
+        //return ((transform.position.x < player.transform.position.x + playerDistance && transform.position.x > player.transform.position.x - playerDistance) && (transform.position.y < player.transform.position.y + playerDistance && transform.position.y > player.transform.position.y - playerDistance));
     }
 
 
-    IEnumerator GoToPrism (GameObject prism)
+    IEnumerator GoTo (GameObject destination)
     {
-        goingToPrism = true;
+        Vector3 targetPosition = new Vector3(destination.transform.position.x, destination.transform.position.y, destination.transform.position.z);
 
-        Vector3 currentPosition = transform.position;
-        Vector3 targetPosition = new Vector3(prism.transform.position.x, prism.transform.position.y, prism.transform.position.z);
         while (Vector3.Distance(transform.position,targetPosition) > 0.1f)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, soulSpeed * Time.deltaTime);
             yield return null;
         }
+        if (destination.tag == "Prism")
+        {
+            GetComponent<SpriteRenderer>().color = destination.GetComponent<SpriteRenderer>().color;
 
-        GetComponent<SpriteRenderer>().color = prism.GetComponent<SpriteRenderer>().color;
-
-        isFollowing = true;
-        goingToPrism = false;
+            isFollowing = true;
+            goingToPrism = false;
+        }
     }
 
 
@@ -118,7 +119,6 @@ public class SoulFollow : MonoBehaviour
             {
                 isFollowing = true;
             }
-            
         }
 
         if( collision.gameObject.CompareTag("Waterfall"))
