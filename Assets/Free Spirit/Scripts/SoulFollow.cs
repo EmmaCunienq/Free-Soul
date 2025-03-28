@@ -17,11 +17,13 @@ public class SoulFollow : MonoBehaviour
     public GameObject[] prisms;
     public bool goingToPrism;
 
+    public Portal portal;
+    public PortalLight[] portalLights;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
         player = GameObject.FindWithTag("Player");
         isFollowing = true;
 
@@ -29,6 +31,9 @@ public class SoulFollow : MonoBehaviour
 
         prisms = GameObject.FindGameObjectsWithTag("Prism");
         goingToPrism = false;
+
+        portal = FindFirstObjectByType<Portal>();
+        portalLights = FindObjectsByType<PortalLight>(FindObjectsSortMode.None);
     }
 
     // Update is called once per frame
@@ -58,11 +63,23 @@ public class SoulFollow : MonoBehaviour
             if (player.GetComponent<PlayerDeplacements>().isClosePrism(prism) && Input.GetKeyDown(KeyCode.E))
             {
                 isFollowing = false;
-                Debug.Log("je suis proche de : " + prism.name);
 
                 goingToPrism = true;
 
                 StartCoroutine(GoTo(prism));
+            }
+        }
+
+        if (portal.isPlayerOver && Input.GetKeyDown(KeyCode.E))
+        {
+            foreach (PortalLight portalLight in portalLights)
+            {
+                if (portalLight.CheckSoulColor(gameObject))
+                {
+                    isFollowing = false;
+
+                    StartCoroutine(GoTo(portalLight.gameObject));
+                }
             }
         }
     }
@@ -101,12 +118,21 @@ public class SoulFollow : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, soulSpeed * Time.deltaTime);
             yield return null;
         }
+
         if (destination.tag == "Prism")
         {
             GetComponent<SpriteRenderer>().color = destination.GetComponent<SpriteRenderer>().color;
 
             isFollowing = true;
             goingToPrism = false;
+        }
+        else if (destination.tag == "Portal Light")
+        {
+            destination.GetComponent<PortalLight>().ActiveLight();
+
+            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+
+            isFollowing = true;
         }
     }
 
