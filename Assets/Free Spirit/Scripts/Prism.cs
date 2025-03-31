@@ -5,6 +5,8 @@ public class Prism : MonoBehaviour
     private bool isActive;
     private Color prismColor;
 
+    private GameObject[] waterfalls;
+
     private void Start()
     {
         if(gameObject.name == "Water prism")
@@ -31,6 +33,8 @@ public class Prism : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().color = prismColor;
         }
+
+        waterfalls = GameObject.FindGameObjectsWithTag("Waterfall");
     }
 
     public void ActivatePrism ()
@@ -39,6 +43,22 @@ public class Prism : MonoBehaviour
         if (isActive)
         {
             GetComponent<SpriteRenderer>().color = prismColor;
+        }
+    }
+
+    public void ActivateWaterfalls ()
+    {
+        foreach (GameObject waterfall in waterfalls)
+        {
+            waterfall.GetComponent<Waterfall>().Activate();
+        }
+    }
+
+    public void DeactivateWaterfalls ()
+    {
+        foreach (GameObject waterfall in waterfalls)
+        {
+            waterfall.GetComponent<Waterfall>().Deactivate();
         }
     }
 }

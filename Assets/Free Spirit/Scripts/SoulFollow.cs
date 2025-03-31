@@ -123,7 +123,16 @@ public class SoulFollow : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().color = destination.GetComponent<SpriteRenderer>().color;
 
-            isFollowing = true;
+            if (destination.name == "Water prism")
+            {
+                destination.GetComponent<Prism>().ActivateWaterfalls();
+            }
+            else
+            {
+                destination.GetComponent<Prism>().DeactivateWaterfalls();
+            }
+
+                isFollowing = true;
             goingToPrism = false;
         }
         else if (destination.tag == "Portal Light")
