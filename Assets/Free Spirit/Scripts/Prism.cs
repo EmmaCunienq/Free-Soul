@@ -22,6 +22,10 @@ public class Prism : MonoBehaviour
             prismColor = Color.red;
             isActive = false;
         }
+        else
+        {
+            Debug.Log("Le nom du prism : " + gameObject.name + " n'est pas le bon");
+        }
 
         if (isActive)
         {
