@@ -2,15 +2,23 @@ using UnityEngine;
 
 public class Prism : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public bool isActive;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        if(gameObject.name == "Water prism")
+        {
+            GetComponent<SpriteRenderer>().color = Color.blue;
+            isActive = true;
+        }
+        else if (gameObject.name == "Earth prism")
+        {
+            GetComponent<SpriteRenderer>().color = Color.green;
+            isActive = true;
+        }
+        else if (gameObject.name == "Fire prism")
+        {
+            isActive = false;
+        }
     }
 }
