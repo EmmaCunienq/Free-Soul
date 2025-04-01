@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3051667860432989907}
   m_Layer: 0
   m_Name: Circle
-  m_TagString: Untagged
+  m_TagString: End Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -189,10 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c22d4486a4cf246a283b43b5e2edd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linerenderer: {fileID: 0}
-  child: {fileID: 0}
-  direction: {x: 0, y: 0}
-  origin: {x: 0, y: 0}
+  end: {fileID: 0}
 --- !u!120 &3388371274732085815
 LineRenderer:
   serializedVersion: 2
