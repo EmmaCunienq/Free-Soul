@@ -12,6 +12,7 @@ TagManager:
   - End Laser
   - Prism
   - Portal Light
+  - Earth Wall
   layers:
   - Default
   - TransparentFX

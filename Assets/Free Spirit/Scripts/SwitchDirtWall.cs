@@ -22,7 +22,6 @@ public class SwitchDirtWall : MonoBehaviour
         {
             animator.SetTrigger("PlayedOnce");
             SwitchDirtWalls();
-            Debug.Log("j'active " + gameObject);
         }
         
     }
@@ -34,7 +33,7 @@ public class SwitchDirtWall : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        isPlayerOver = collision.CompareTag("Player");
+        isPlayerOver = !collision.CompareTag("Player");
     }
 
     private void GetAllChildren ()

@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 2276773690141510272}
   m_Layer: 0
   m_Name: earth wall (2)
-  m_TagString: Ground
+  m_TagString: Earth Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 1955434607414001679}
   m_Layer: 0
   m_Name: earth wall (1)
-  m_TagString: Ground
+  m_TagString: Earth Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -484,7 +484,7 @@ GameObject:
   - component: {fileID: 6143657914064673173}
   m_Layer: 0
   m_Name: earth wall
-  m_TagString: Ground
+  m_TagString: Earth Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

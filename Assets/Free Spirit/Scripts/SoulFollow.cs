@@ -132,6 +132,16 @@ public class SoulFollow : MonoBehaviour
                 destination.GetComponent<Prism>().DeactivateWaterfalls();
             }
 
+            if (destination.name == "Earth prism")
+            {
+                Debug.Log("je suis là");
+                destination.GetComponent<Prism>().InitiateWalls();
+            }
+            else
+            {
+                destination.GetComponent<Prism>().HideWalls();
+            }
+
                 isFollowing = true;
             goingToPrism = false;
         }

@@ -7,6 +7,8 @@ public class Prism : MonoBehaviour
 
     private GameObject[] waterfalls;
 
+    private GameObject[] dirtWalls;
+
     private void Start()
     {
         if(gameObject.name == "Water prism")
@@ -34,7 +36,12 @@ public class Prism : MonoBehaviour
             GetComponent<SpriteRenderer>().color = prismColor;
         }
 
+
         waterfalls = GameObject.FindGameObjectsWithTag("Waterfall");
+
+
+        dirtWalls = GameObject.FindGameObjectsWithTag("Earth Wall");
+        HideWalls();
     }
 
     public void ActivatePrism ()
@@ -51,6 +58,7 @@ public class Prism : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Color.white;
     }
 
+    //methodes à metre dans une classe héritée?
     public void ActivateWaterfalls ()
     {
         foreach (GameObject waterfall in waterfalls)
@@ -64,6 +72,24 @@ public class Prism : MonoBehaviour
         foreach (GameObject waterfall in waterfalls)
         {
             waterfall.GetComponent<Waterfall>().Deactivate();
+        }
+    }
+
+    public void InitiateWalls ()
+    {
+
+        foreach (GameObject dirwall in dirtWalls)
+        {
+            Debug.Log("j'initie chaque mur");
+            dirwall.GetComponent<DirtWall>().InitiateWall();
+        }
+    }
+
+    public void HideWalls ()
+    {
+        foreach (GameObject dirtwall in dirtWalls)
+        {
+            dirtwall.GetComponent<DirtWall>().DeactivateWall();
         }
     }
 }

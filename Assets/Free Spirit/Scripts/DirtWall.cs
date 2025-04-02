@@ -3,11 +3,18 @@ using UnityEngine;
 
 public class DirtWall : MonoBehaviour
 {
-
+    public bool firstActive;
     public bool isActive;
 
     private void Start()
     {
+        SwitchActivation();
+    }
+
+    public void InitiateWall ()
+    {
+        Debug.Log("je suis dans le mur");
+        isActive = firstActive;
         SwitchActivation();
     }
 
