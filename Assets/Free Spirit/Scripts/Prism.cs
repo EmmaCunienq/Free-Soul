@@ -40,10 +40,15 @@ public class Prism : MonoBehaviour
     public void ActivatePrism ()
     {
         isActive = true;
-        if (isActive)
-        {
-            GetComponent<SpriteRenderer>().color = prismColor;
-        }
+
+        GetComponent<SpriteRenderer>().color = prismColor;
+    }
+
+    public void DeactivatePrism ()
+    {
+        isActive = false;
+
+        GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     public void ActivateWaterfalls ()

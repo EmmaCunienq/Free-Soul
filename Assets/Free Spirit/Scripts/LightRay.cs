@@ -28,8 +28,6 @@ public class LightRay : MonoBehaviour
         origin = transform.position;
 
         linerenderer = GetComponent<LineRenderer>();
-
-        end = GameObject.FindGameObjectWithTag("End Laser");
     }
 
     // Update is called once per frame
@@ -39,13 +37,13 @@ public class LightRay : MonoBehaviour
 
         if (hit.collider != null)
         {
-            if (hit.collider.CompareTag("End Laser"))
+            if (hit.collider == end.GetComponent<PolygonCollider2D>())
             {
-                ActivateEndPrism();
+                hit.collider.GetComponent<Prism>().ActivatePrism();
             }
             else
             {
-                DeactivateEndPrism();
+                //end.GetComponent<Prism>().DeactivatePrism();
             }
 
             linerenderer.positionCount = 2;
@@ -81,13 +79,13 @@ public class LightRay : MonoBehaviour
 
         if (hit.collider != null)
         {
-            if (hit.collider.CompareTag("End Laser"))
+            if (hit.collider == end.GetComponent<PolygonCollider2D>())
             {
-                ActivateEndPrism();
+                hit.collider.GetComponent<Prism>().ActivatePrism();
             }
             else
             {
-                DeactivateEndPrism();
+                //end.GetComponent<Prism>().DeactivatePrism();
             }
 
             linerenderer.positionCount++;
@@ -102,15 +100,5 @@ public class LightRay : MonoBehaviour
             linerenderer.positionCount++;
             linerenderer.SetPosition(linerenderer.positionCount - 1, direction * 100); // erreur quand le laser est dans le vide... le deuxieme point n'est pas le bon
         }
-    }
-
-    private void ActivateEndPrism ()
-    {
-        end.GetComponent<SpriteRenderer>().color = gameObject.GetComponent<SpriteRenderer>().color;
-    }
-
-    private void DeactivateEndPrism ()
-    {
-        end.GetComponent<SpriteRenderer>().color = Color.white;
     }
 }

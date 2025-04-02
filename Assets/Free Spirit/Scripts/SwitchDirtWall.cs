@@ -22,6 +22,7 @@ public class SwitchDirtWall : MonoBehaviour
         {
             animator.SetTrigger("PlayedOnce");
             SwitchDirtWalls();
+            Debug.Log("j'active " + gameObject);
         }
         
     }
