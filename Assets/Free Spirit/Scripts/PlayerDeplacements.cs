@@ -8,7 +8,7 @@ public class PlayerDeplacements : MonoBehaviour
     public float jumpForce;
     public float slideSpeed;
 
-    private bool isJumping = false;
+    public int jumps = 0;
     private Vector3 velocity = Vector3.zero;
     public bool isGrounded;
     public bool isOnAWall;
@@ -26,7 +26,7 @@ public class PlayerDeplacements : MonoBehaviour
 
     private void Update()
     {
-        Jump(Input.GetButtonDown("Jump") && isGrounded);
+        Jump(Input.GetButtonDown("Jump") && jumps < 2);
     }
 
     void FixedUpdate()
@@ -56,7 +56,7 @@ public class PlayerDeplacements : MonoBehaviour
         if (isJumping)
         {
             playerRB.AddForce(new Vector2(0f, jumpForce));
-            isJumping = false;
+            jumps++;
         }
     }
 
@@ -75,6 +75,7 @@ public class PlayerDeplacements : MonoBehaviour
             if (collision.contacts[0].normal.y > 0.5f)
             {
                 isGrounded = true;
+                jumps = 0;
             }
 
             if (collision.contacts[0].normal.y < 0.5f)
