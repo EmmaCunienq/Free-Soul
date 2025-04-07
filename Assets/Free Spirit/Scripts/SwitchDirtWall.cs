@@ -6,13 +6,24 @@ public class SwitchDirtWall : MonoBehaviour
 
     private bool isPlayerOver;
 
+    public Color color;
+    private GameObject child;
+
     public GameObject[] dirtWalls;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         animator = GetComponent<Animator>();
 
-        GetAllChildren(); 
+        GetAllDirtWalls();
+
+        child = transform.GetChild(0).gameObject;
+        child.GetComponent<SpriteRenderer>().color = color;
+
+        foreach (GameObject dirtWall in dirtWalls)
+        {
+            dirtWall.GetComponent<DirtWall>().SetColor(color);
+        }
     }
 
     // Update is called once per frame
@@ -36,13 +47,17 @@ public class SwitchDirtWall : MonoBehaviour
         isPlayerOver = !collision.CompareTag("Player");
     }
 
-    private void GetAllChildren ()
+    private void GetAllDirtWalls ()
     {
-        dirtWalls = new GameObject[transform.childCount];
-
+        dirtWalls = new GameObject[transform.childCount - 1];
+        int k = 0;
         for (int i = 0; i < transform.childCount; i++)
         {
-            dirtWalls[i] = transform.GetChild(i).gameObject;
+            if (transform.GetChild(i).CompareTag("Earth Wall"))
+            {
+                dirtWalls[k] = transform.GetChild(i).gameObject;
+                k++;
+            }  
         }
     }
 

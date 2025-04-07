@@ -6,14 +6,22 @@ public class DirtWall : MonoBehaviour
     public bool firstActive;
     public bool isActive;
 
+    private GameObject child;
+
     private void Start()
     {
         SwitchActivation();
+
+        child = transform.GetChild(0).gameObject;
+    }
+
+    public void SetColor (Color color)
+    {
+        child.GetComponent<SpriteRenderer>().color = color;
     }
 
     public void InitiateWall ()
     {
-        Debug.Log("je suis dans le mur");
         isActive = firstActive;
         SwitchActivation();
     }
