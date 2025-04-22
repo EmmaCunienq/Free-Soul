@@ -52,12 +52,12 @@ public class SwitchWaterfall : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        isPlayerOver = collision.gameObject.CompareTag("Player");
+        isPlayerOver = collision.CompareTag("Player");
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        isPlayerOver = collision.gameObject.CompareTag("Player");
+        isPlayerOver = !collision.CompareTag("Player");
     }
 
     
