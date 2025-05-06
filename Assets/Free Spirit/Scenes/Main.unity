@@ -2192,7 +2192,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtZone: {fileID: 119683310}
-  txtSpeed: 2
+  txtSpeed: 0.5
+  inDialogue: 0
   dialogue: {fileID: 551399522}
 --- !u!4 &551399524
 Transform:
