@@ -1,7 +1,4 @@
-using UnityEditor.Animations;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class LightRay : MonoBehaviour
 {
